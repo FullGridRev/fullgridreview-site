@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<link rel="icon" type="image/png" href="../favicon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FGR Round 8 · Austrian Grand Prix</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}
+/* Layout: one 640px reading column, like an email, with telemetry-style data readouts. Single dark look, matching fullgridreview.com. */
+:root{
+  color-scheme: dark;
+  --bg:#0d0f12;
+  --panel:#141820;
+  --line:#232a35;
+  --fg:#e6ebf2;
+  --muted:#8b97a8;
+  --accent:#2fd8f0;
+  --accent-dim:rgba(47,216,240,.14);
+  --merc:#27c4b0; --fer:#e8402f; --rb:#3b6fe0; --mcl:#ff8a1f;
+  --display:"Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --body:"Inter", -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.65;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:32px 56px}
+.wrap{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:40px}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.mono{font-family:var(--mono)}
+.label{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:clamp(30px,6vw,40px);font-weight:700;letter-spacing:-.01em}
+h2{font-size:24px;font-weight:700}
+h3{font-size:17px;font-weight:700}
+p{margin:0}
+section{display:flex;flex-direction:column;gap:14px}
+
+/* masthead */
+.mast{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:14px}
+.brand{font-family:var(--display);font-weight:700;font-size:20px;letter-spacing:.02em}
+.brand span{color:var(--accent)}
+.lede{font-size:18px;color:var(--fg)}
+.kicker{color:var(--accent)}
+
+/* result strip */
+.podium{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.pod{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.pod .pos{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.pod .who{font-family:var(--display);font-weight:700;font-size:17px}
+.pod .gap{font-family:var(--mono);font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.pod.p1{border-color:var(--accent)}
+.pod.p1 .pos{color:var(--accent)}
+
+.results{width:100%;border-collapse:collapse;font-size:14px;font-variant-numeric:tabular-nums}
+.results td{padding:7px 4px;border-bottom:1px solid var(--line)}
+.results td:first-child{font-family:var(--mono);color:var(--muted);width:2.5em}
+.results td:last-child{font-family:var(--mono);text-align:right;color:var(--muted)}
+.tbl{overflow-x:auto}
+.note{font-size:13.5px;color:var(--muted)}
+
+/* takeaways */
+.takes{display:flex;flex-direction:column;gap:22px}
+.take{display:flex;flex-direction:column;gap:6px}
+
+/* clinch readout */
+.readout{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:18px;display:flex;flex-direction:column;gap:14px}
+.gaugerow{display:grid;grid-template-columns:7.5em minmax(0,1fr) 3.5em;align-items:center;gap:10px;font-size:14px}
+.gaugerow .n{font-family:var(--mono);text-align:right;font-variant-numeric:tabular-nums}
+.bar{height:10px;background:var(--line);border-radius:2px;overflow:hidden}
+.bar i{display:block;height:100%}
+.target{border-top:1px dashed var(--accent);padding-top:12px;font-family:var(--mono);font-size:13px;color:var(--accent)}
+
+/* standings */
+.stand{width:100%;border-collapse:collapse;font-size:14.5px;font-variant-numeric:tabular-nums}
+.stand th{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-align:left;font-weight:400;padding:0 4px 6px}
+.stand td{padding:8px 4px;border-top:1px solid var(--line)}
+.stand td.r,.stand th.r{text-align:right;font-family:var(--mono)}
+.sw{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px;vertical-align:middle}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px}
+.two > div{min-width:0;display:flex;flex-direction:column;gap:10px}
+
+/* calendar */
+.cal{display:flex;flex-direction:column}
+.cal div{display:grid;grid-template-columns:5.5em minmax(0,1fr);gap:12px;padding:9px 0;border-top:1px solid var(--line);font-size:15px}
+.cal .d{font-family:var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.cal .next .d,.cal .next span{color:var(--accent)}
+
+.foot{border-top:1px solid var(--line);padding-top:18px;display:flex;flex-direction:column;gap:8px;font-size:13.5px;color:var(--muted)}
+.cta{background:var(--accent-dim);border:1px solid var(--accent);border-radius:6px;padding:16px 18px;display:flex;flex-direction:column;gap:6px}
+@media (max-width:420px){.podium{grid-template-columns:1fr}.gaugerow{grid-template-columns:6.5em minmax(0,1fr) 3em}}
+
+.nav{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-family:var(--mono);font-size:13px}
+.nav a{text-decoration:none}
+.back{font-family:var(--mono);font-size:13px;text-decoration:none}
+.list{display:flex;flex-direction:column}
+.row{display:grid;grid-template-columns:3.2em 5.2em minmax(0,1fr);gap:12px;align-items:baseline;padding:12px 0;border-top:1px solid var(--line);text-decoration:none;color:var(--fg)}
+a.row:hover .t,a.row:focus-visible .t{color:var(--accent)}
+.row .n{font-family:var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.row .d{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.row .t{display:flex;flex-direction:column;gap:2px;min-width:0}
+.row .t b{font-family:var(--display);font-size:16px}
+.row .t span{font-size:14px;color:var(--muted)}
+.row.soon{opacity:.55}
+.row.latest .n{color:var(--accent)}
+.pill{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--accent);color:var(--accent);border-radius:3px;padding:1px 6px;margin-left:8px;vertical-align:middle}
+</style>
+</head><body>
+<div class="wrap">
+  <header class="mast"><div class="brand">THE FULL GRID <span>REVIEW</span></div><div class="label">Archive · Round 8 · Jun 28, 2026</div></header>
+  <a class="back" href="./">← All issues</a>
+  <section>
+    <div class="label kicker">Round 8 · Austrian Grand Prix · Red Bull Ring</div>
+    <h1>Russell holds off Verstappen to revive his title bid</h1>
+    <p class="lede">George Russell won from pole by 1.6 seconds, with Max Verstappen closing in all afternoon at Red Bull&#x27;s home track.</p>
+  </section>
+  <section>
+    <div class="label">The result</div>
+    <div class="podium"><div class="pod p1"><span class="pos">P1</span><span class="who">Russell</span><span class="gap">Mercedes</span></div><div class="pod"><span class="pos">P2</span><span class="who">Verstappen</span><span class="gap">Red Bull · +1.611s</span></div><div class="pod"><span class="pos">P3</span><span class="who">Antonelli</span><span class="gap">Mercedes · +1.986s</span></div></div>
+    <div class="tbl"><table class="results"><tr><td>4</td><td>Oscar Piastri</td><td>McLaren</td><td>+21.809s</td></tr><tr><td>5</td><td>Lewis Hamilton</td><td>Ferrari</td><td>+26.393s</td></tr><tr><td>6</td><td>Isack Hadjar</td><td>Red Bull</td><td>+29.399s</td></tr><tr><td>7</td><td>Lando Norris</td><td>McLaren</td><td>+31.505s</td></tr><tr><td>8</td><td>Charles Leclerc</td><td>Ferrari</td><td>+45.659s</td></tr><tr><td>9</td><td>Liam Lawson</td><td>Racing Bulls</td><td>+1 lap</td></tr><tr><td>10</td><td>Arvid Lindblad</td><td>Racing Bulls</td><td>+1 lap</td></tr></table></div>
+  </section>
+  <section><div class="label">What happened</div><p>Russell controlled the race from pole, but Verstappen kept the pressure on and cut the gap to about a second by the closing stint. Mercedes brought Russell in from the lead for his final stop and he rejoined third, then the pit cycle put him back in front.</p><p>Kimi Antonelli lost ground leaving the pits, fought back past Charles Leclerc twice, and finished third, less than half a second behind Verstappen. A Virtual Safety Car arrived just after Antonelli had stopped, too late to help him.</p></section>
+  <section><div class="label">Why it matters</div><div class="takes"><div class="take"><h3>The gap comes down to 40</h3><p>Russell&#x27;s second win of the year cut Antonelli&#x27;s lead to 40 points.</p></div><div class="take"><h3>Verstappen is getting closer</h3><p>Second place, a second and a half from the win, was Red Bull&#x27;s strongest showing of the season so far.</p></div><div class="take"><h3>Hamilton&#x27;s three-stop recovery</h3><p>After losing places to Verstappen in a long wheel-to-wheel fight, Hamilton used a three-stop plan to climb back to fifth.</p></div></div></section>
+  <section>
+    <div class="label">Drivers' championship after Round 8</div>
+    <div class="tbl"><table class="stand"><tr><th>Pos</th><th>Driver</th><th class="r">Pts</th><th class="r">Gap</th></tr><tr><td class="mono">1</td><td><span class="sw" style="background:var(--merc)"></span>Antonelli</td><td class="r">171</td><td class="r">—</td></tr><tr><td class="mono">2</td><td><span class="sw" style="background:var(--merc)"></span>Russell</td><td class="r">131</td><td class="r">−40</td></tr><tr><td class="mono">3</td><td><span class="sw" style="background:var(--fer)"></span>Hamilton</td><td class="r">125</td><td class="r">−46</td></tr><tr><td class="mono">4</td><td><span class="sw" style="background:var(--mcl)"></span>Piastri</td><td class="r">82</td><td class="r">−89</td></tr><tr><td class="mono">5</td><td><span class="sw" style="background:var(--mcl)"></span>Norris</td><td class="r">79</td><td class="r">−92</td></tr></table></div>
+  </section>
+  <section>
+    <div class="label">Next up</div>
+    <div class="cal"><div class="next"><span class="d">Jul 5</span><span>British Grand Prix</span></div></div>
+  </section>
+  <div class="cta">
+    <h3>Watch the video recaps</h3>
+    <p>Every race gets the full breakdown on <a href="https://www.youtube.com/@FullGridReview" target="_blank" rel="noopener">YouTube @FullGridReview</a> and <a href="https://www.tiktok.com/@fullgridreview" target="_blank" rel="noopener">TikTok @fullgridreview</a>.</p>
+  </div>
+  <nav class="nav"><a href="barcelona.html">← Round 7 · Barcelona</a><a href="britain.html">Round 9 · Britain →</a></nav>
+  <footer class="foot">
+    <p>Forwarded this? Subscribe free at fullgridreview.com.</p>
+    <p>The Full Grid Review is an independent fan channel, not affiliated with Formula 1 or any team. Questions or tips: fullgridrev@gmail.com</p>
+  </footer>
+</div>
+</body></html>

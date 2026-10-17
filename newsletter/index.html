@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FGR Weekly | Newsletter Archive | The Full Grid Review</title>
+<meta name="description" content="Every FGR Weekly issue: one five-minute recap per 2026 Grand Prix, plus the title math.">
+<link rel="icon" type="image/png" href="../favicon.png">
+<meta name="theme-color" content="#0D0F12">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one 640px reading column, like an email, with telemetry-style data readouts. Single dark look, matching fullgridreview.com. */
+:root{
+  color-scheme: dark;
+  --bg:#0d0f12;
+  --panel:#141820;
+  --line:#232a35;
+  --fg:#e6ebf2;
+  --muted:#8b97a8;
+  --accent:#2fd8f0;
+  --accent-dim:rgba(47,216,240,.14);
+  --merc:#27c4b0; --fer:#e8402f; --rb:#3b6fe0; --mcl:#ff8a1f;
+  --display:"Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --body:"Inter", -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.65;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:32px 56px}
+.wrap{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:40px}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.mono{font-family:var(--mono)}
+.label{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:clamp(30px,6vw,40px);font-weight:700;letter-spacing:-.01em}
+h2{font-size:24px;font-weight:700}
+h3{font-size:17px;font-weight:700}
+p{margin:0}
+section{display:flex;flex-direction:column;gap:14px}
+
+/* masthead */
+.mast{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:14px}
+.brand{font-family:var(--display);font-weight:700;font-size:20px;letter-spacing:.02em}
+.brand span{color:var(--accent)}
+.lede{font-size:18px;color:var(--fg)}
+.kicker{color:var(--accent)}
+
+/* result strip */
+.podium{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.pod{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.pod .pos{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.pod .who{font-family:var(--display);font-weight:700;font-size:17px}
+.pod .gap{font-family:var(--mono);font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.pod.p1{border-color:var(--accent)}
+.pod.p1 .pos{color:var(--accent)}
+
+.results{width:100%;border-collapse:collapse;font-size:14px;font-variant-numeric:tabular-nums}
+.results td{padding:7px 4px;border-bottom:1px solid var(--line)}
+.results td:first-child{font-family:var(--mono);color:var(--muted);width:2.5em}
+.results td:last-child{font-family:var(--mono);text-align:right;color:var(--muted)}
+.tbl{overflow-x:auto}
+.note{font-size:13.5px;color:var(--muted)}
+
+/* takeaways */
+.takes{display:flex;flex-direction:column;gap:22px}
+.take{display:flex;flex-direction:column;gap:6px}
+
+/* clinch readout */
+.readout{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:18px;display:flex;flex-direction:column;gap:14px}
+.gaugerow{display:grid;grid-template-columns:7.5em minmax(0,1fr) 3.5em;align-items:center;gap:10px;font-size:14px}
+.gaugerow .n{font-family:var(--mono);text-align:right;font-variant-numeric:tabular-nums}
+.bar{height:10px;background:var(--line);border-radius:2px;overflow:hidden}
+.bar i{display:block;height:100%}
+.target{border-top:1px dashed var(--accent);padding-top:12px;font-family:var(--mono);font-size:13px;color:var(--accent)}
+
+/* standings */
+.stand{width:100%;border-collapse:collapse;font-size:14.5px;font-variant-numeric:tabular-nums}
+.stand th{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-align:left;font-weight:400;padding:0 4px 6px}
+.stand td{padding:8px 4px;border-top:1px solid var(--line)}
+.stand td.r,.stand th.r{text-align:right;font-family:var(--mono)}
+.sw{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px;vertical-align:middle}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px}
+.two > div{min-width:0;display:flex;flex-direction:column;gap:10px}
+
+/* calendar */
+.cal{display:flex;flex-direction:column}
+.cal div{display:grid;grid-template-columns:5.5em minmax(0,1fr);gap:12px;padding:9px 0;border-top:1px solid var(--line);font-size:15px}
+.cal .d{font-family:var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.cal .next .d,.cal .next span{color:var(--accent)}
+
+.foot{border-top:1px solid var(--line);padding-top:18px;display:flex;flex-direction:column;gap:8px;font-size:13.5px;color:var(--muted)}
+.cta{background:var(--accent-dim);border:1px solid var(--accent);border-radius:6px;padding:16px 18px;display:flex;flex-direction:column;gap:6px}
+@media (max-width:420px){.podium{grid-template-columns:1fr}.gaugerow{grid-template-columns:6.5em minmax(0,1fr) 3em}}
+
+.nav{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-family:var(--mono);font-size:13px}
+.nav a{text-decoration:none}
+.back{font-family:var(--mono);font-size:13px;text-decoration:none}
+.list{display:flex;flex-direction:column}
+.row{display:grid;grid-template-columns:3.2em 5.2em minmax(0,1fr);gap:12px;align-items:baseline;padding:12px 0;border-top:1px solid var(--line);text-decoration:none;color:var(--fg)}
+a.row:hover .t,a.row:focus-visible .t{color:var(--accent)}
+.row .n{font-family:var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.row .d{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.row .t{display:flex;flex-direction:column;gap:2px;min-width:0}
+.row .t b{font-family:var(--display);font-size:16px}
+.row .t span{font-size:14px;color:var(--muted)}
+.row.soon{opacity:.55}
+.row.latest .n{color:var(--accent)}
+.pill{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--accent);color:var(--accent);border-radius:3px;padding:1px 6px;margin-left:8px;vertical-align:middle}
+</style>
+<style>body{margin:0}</style>
+</head><body>
+<div class="wrap">
+  <header class="mast"><div class="brand">THE FULL GRID <span>REVIEW</span></div><div class="label">Newsletter archive · 2026 season</div></header>
+  <a class="back" href="../">← fullgridreview.com</a>
+  <section>
+    <div class="label kicker">FGR Weekly</div>
+    <h1>Every race of 2026, in five to eight minutes each</h1>
+    <p class="lede">One issue per Grand Prix: what happened, why it happened, and what it means for the title fight. Weekly issues continue through the off-season.</p>
+  </section>
+  <section>
+    <div class="label">Season so far · 17 of 23 rounds</div>
+    <div class="list"><a class="row latest" href="singapore.html"><span class="n">R17</span><span class="d">Oct 11</span><span class="t"><b>Singapore Grand Prix<span class="pill">Latest</span></b><span>Verstappen finally conquers Marina Bay. Antonelli&#x27;s match point is Austin.</span></span></a><a class="row" href="bahrain.html"><span class="n">R16</span><span class="d">Oct 4</span><span class="t"><b>Bahrain Grand Prix</b><span>Verstappen wins in the rain as Russell&#x27;s engine fails</span></span></a><a class="row" href="azerbaijan.html"><span class="n">R15</span><span class="d">Sep 26</span><span class="t"><b>Azerbaijan Grand Prix</b><span>Russell beats Verstappen by two tenths in Baku</span></span></a><a class="row" href="madrid.html"><span class="n">R14</span><span class="d">Sep 13</span><span class="t"><b>Spanish Grand Prix</b><span>Antonelli wins the first Madrid Grand Prix as the VSC robs Norris</span></span></a><a class="row" href="italy.html"><span class="n">R13</span><span class="d">Sep 6</span><span class="t"><b>Italian Grand Prix</b><span>Antonelli wins Monza from 19th on the grid</span></span></a><a class="row" href="netherlands.html"><span class="n">R12</span><span class="d">Aug 23</span><span class="t"><b>Dutch Grand Prix</b><span>Norris makes it two in a row at Zandvoort&#x27;s farewell</span></span></a><a class="row" href="hungary.html"><span class="n">R11</span><span class="d">Jul 26</span><span class="t"><b>Hungarian Grand Prix</b><span>Norris wins at last</span></span></a><a class="row" href="belgium.html"><span class="n">R10</span><span class="d">Jul 19</span><span class="t"><b>Belgian Grand Prix</b><span>Antonelli hunts down Leclerc at Spa</span></span></a><a class="row" href="britain.html"><span class="n">R09</span><span class="d">Jul 5</span><span class="t"><b>British Grand Prix</b><span>Leclerc wins at Silverstone as Antonelli&#x27;s weekend falls apart</span></span></a><a class="row" href="austria.html"><span class="n">R08</span><span class="d">Jun 28</span><span class="t"><b>Austrian Grand Prix</b><span>Russell holds off Verstappen to revive his title bid</span></span></a><a class="row" href="barcelona.html"><span class="n">R07</span><span class="d">Jun 14</span><span class="t"><b>Barcelona-Catalunya Grand Prix</b><span>Hamilton wins for Ferrari at last</span></span></a><a class="row" href="monaco.html"><span class="n">R06</span><span class="d">Jun 7</span><span class="t"><b>Monaco Grand Prix</b><span>Five straight for Antonelli as Russell&#x27;s race unravels</span></span></a><a class="row" href="canada.html"><span class="n">R05</span><span class="d">May 24</span><span class="t"><b>Canadian Grand Prix</b><span>Russell&#x27;s retirement from the lead hands Antonelli a fourth win</span></span></a><a class="row" href="miami.html"><span class="n">R04</span><span class="d">May 3</span><span class="t"><b>Miami Grand Prix</b><span>Three in a row for Antonelli as McLaren returns to form</span></span></a><a class="row" href="japan.html"><span class="n">R03</span><span class="d">Mar 29</span><span class="t"><b>Japanese Grand Prix</b><span>Antonelli takes the championship lead with a Suzuka win</span></span></a><a class="row" href="china.html"><span class="n">R02</span><span class="d">Mar 15</span><span class="t"><b>Chinese Grand Prix</b><span>Antonelli&#x27;s first win, Hamilton&#x27;s first Ferrari podium</span></span></a><a class="row" href="australia.html"><span class="n">R01</span><span class="d">Mar 8</span><span class="t"><b>Australian Grand Prix</b><span>A new era opens with a Mercedes one-two</span></span></a></div>
+  </section>
+  <section>
+    <div class="label">Still to come</div>
+    <div class="list"><div class="row soon"><span class="n">R18</span><span class="d">Oct 25</span><span class="t"><b>United States Grand Prix</b><span>Issue arrives the day after the race</span></span></div><div class="row soon"><span class="n">R19</span><span class="d">Nov 1</span><span class="t"><b>Mexico City Grand Prix</b><span>Issue arrives the day after the race</span></span></div><div class="row soon"><span class="n">R20</span><span class="d">Nov 8</span><span class="t"><b>Brazilian Grand Prix</b><span>Issue arrives the day after the race</span></span></div><div class="row soon"><span class="n">R21</span><span class="d">Nov 22</span><span class="t"><b>Las Vegas Grand Prix</b><span>Issue arrives the day after the race</span></span></div><div class="row soon"><span class="n">R22</span><span class="d">Nov 29</span><span class="t"><b>Qatar Grand Prix</b><span>Issue arrives the day after the race</span></span></div><div class="row soon"><span class="n">R23</span><span class="d">Dec 6</span><span class="t"><b>Abu Dhabi Grand Prix</b><span>Issue arrives the day after the race</span></span></div></div>
+  </section>
+  <footer class="foot">
+    <p>Forwarded this? Subscribe free at fullgridreview.com.</p>
+    <p>The Full Grid Review is an independent fan channel, not affiliated with Formula 1 or any team. Questions or tips: fullgridrev@gmail.com</p>
+  </footer>
+</div>
+</body></html>
