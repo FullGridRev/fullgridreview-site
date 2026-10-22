@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<link rel="icon" type="image/png" href="../favicon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FGR Weekly · United States GP preview · Oct 22, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}
+/* Layout: one 640px reading column, like an email, with telemetry-style data readouts. Single dark look, matching fullgridreview.com. */
+:root{
+  color-scheme: dark;
+  --bg:#0d0f12;
+  --panel:#141820;
+  --line:#232a35;
+  --fg:#e6ebf2;
+  --muted:#8b97a8;
+  --accent:#2fd8f0;
+  --accent-dim:rgba(47,216,240,.14);
+  --merc:#27c4b0; --fer:#e8402f; --rb:#3b6fe0; --mcl:#ff8a1f;
+  --display:"Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --body:"Inter", -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.65;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:32px 56px}
+.wrap{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:40px}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.mono{font-family:var(--mono)}
+.label{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:clamp(30px,6vw,40px);font-weight:700;letter-spacing:-.01em}
+h2{font-size:24px;font-weight:700}
+h3{font-size:17px;font-weight:700}
+p{margin:0}
+section{display:flex;flex-direction:column;gap:14px}
+
+/* masthead */
+.mast{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:14px}
+.brand{font-family:var(--display);font-weight:700;font-size:20px;letter-spacing:.02em}
+.brand span{color:var(--accent)}
+.lede{font-size:18px;color:var(--fg)}
+.kicker{color:var(--accent)}
+
+/* result strip */
+.podium{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.pod{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.pod .pos{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.pod .who{font-family:var(--display);font-weight:700;font-size:17px}
+.pod .gap{font-family:var(--mono);font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.pod.p1{border-color:var(--accent)}
+.pod.p1 .pos{color:var(--accent)}
+
+.results{width:100%;border-collapse:collapse;font-size:14px;font-variant-numeric:tabular-nums}
+.results td{padding:7px 4px;border-bottom:1px solid var(--line)}
+.results td:first-child{font-family:var(--mono);color:var(--muted);width:2.5em}
+.results td:last-child{font-family:var(--mono);text-align:right;color:var(--muted)}
+.tbl{overflow-x:auto}
+.note{font-size:13.5px;color:var(--muted)}
+
+/* takeaways */
+.takes{display:flex;flex-direction:column;gap:22px}
+.take{display:flex;flex-direction:column;gap:6px}
+
+/* clinch readout */
+.readout{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:18px;display:flex;flex-direction:column;gap:14px}
+.gaugerow{display:grid;grid-template-columns:7.5em minmax(0,1fr) 3.5em;align-items:center;gap:10px;font-size:14px}
+.gaugerow .n{font-family:var(--mono);text-align:right;font-variant-numeric:tabular-nums}
+.bar{height:10px;background:var(--line);border-radius:2px;overflow:hidden}
+.bar i{display:block;height:100%}
+.target{border-top:1px dashed var(--accent);padding-top:12px;font-family:var(--mono);font-size:13px;color:var(--accent)}
+
+/* standings */
+.stand{width:100%;border-collapse:collapse;font-size:14.5px;font-variant-numeric:tabular-nums}
+.stand th{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-align:left;font-weight:400;padding:0 4px 6px}
+.stand td{padding:8px 4px;border-top:1px solid var(--line)}
+.stand td.r,.stand th.r{text-align:right;font-family:var(--mono)}
+.sw{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px;vertical-align:middle}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px}
+.two > div{min-width:0;display:flex;flex-direction:column;gap:10px}
+
+/* calendar */
+.cal{display:flex;flex-direction:column}
+.cal div{display:grid;grid-template-columns:5.5em minmax(0,1fr);gap:12px;padding:9px 0;border-top:1px solid var(--line);font-size:15px}
+.cal .d{font-family:var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.cal .next .d,.cal .next span{color:var(--accent)}
+
+.foot{border-top:1px solid var(--line);padding-top:18px;display:flex;flex-direction:column;gap:8px;font-size:13.5px;color:var(--muted)}
+.cta{background:var(--accent-dim);border:1px solid var(--accent);border-radius:6px;padding:16px 18px;display:flex;flex-direction:column;gap:6px}
+@media (max-width:420px){.podium{grid-template-columns:1fr}.gaugerow{grid-template-columns:6.5em minmax(0,1fr) 3em}}
+
+.nav{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-family:var(--mono);font-size:13px}
+.nav a{text-decoration:none}
+.back{font-family:var(--mono);font-size:13px;text-decoration:none}
+.list{display:flex;flex-direction:column}
+.row{display:grid;grid-template-columns:3.2em 5.2em minmax(0,1fr);gap:12px;align-items:baseline;padding:12px 0;border-top:1px solid var(--line);text-decoration:none;color:var(--fg)}
+a.row:hover .t,a.row:focus-visible .t{color:var(--accent)}
+.row .n{font-family:var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.row .d{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.row .t{display:flex;flex-direction:column;gap:2px;min-width:0}
+.row .t b{font-family:var(--display);font-size:16px}
+.row .t span{font-size:14px;color:var(--muted)}
+.row.soon{opacity:.55}
+.row.latest .n{color:var(--accent)}
+.pill{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--accent);color:var(--accent);border-radius:3px;padding:1px 6px;margin-left:8px;vertical-align:middle}
+</style>
+</head><body>
+
+
+<div class="wrap">
+  <header class="mast">
+    <div class="brand">THE FULL GRID <span>REVIEW</span></div>
+    <div class="label">Race week · Oct 22, 2026</div>
+  </header>
+  <a class="back" href="./">← All issues</a>
+
+  <section>
+    <div class="label kicker">FGR Weekly · United States Grand Prix preview</div>
+    <h1>Match point in Texas: what Antonelli needs to be champion on Sunday</h1>
+    <p class="lede">No race last weekend, so this week is about the one coming up. Kimi Antonelli arrives in Austin with his first chance to clinch the title, Mercedes is bringing upgrades for both cars, and Max Verstappen has won the last two races.</p>
+  </section>
+
+  <section>
+    <div class="label">The title math</div>
+    <h2>Three things have to happen on Sunday</h2>
+    <div class="readout">
+      <div class="gaugerow"><span>Antonelli</span><div class="bar"><i style="width:100%;background:var(--merc)"></i></div><span class="n">340</span></div>
+      <div class="gaugerow"><span>Russell</span><div class="bar"><i style="width:70%;background:var(--merc);opacity:.6"></i></div><span class="n">238</span></div>
+      <div class="gaugerow"><span>Hamilton</span><div class="bar"><i style="width:67.4%;background:var(--fer)"></i></div><span class="n">229</span></div>
+      <div class="target">Antonelli wins + Russell P9 or lower + Hamilton P5 or lower = champion</div>
+    </div>
+    <p>After Austin, five races and 125 points remain. A win takes Antonelli to 365. If Russell scores 2 points or fewer, he can at best tie Antonelli, and Antonelli wins any tie on race wins. Hamilton has to be held to 10 points or fewer for the same reason. A win in Austin also knocks out Verstappen, Leclerc and Norris wherever they finish.</p>
+    <p>If any of the three doesn't happen, the next chance is Mexico City on November 1. At 20, Antonelli would be the youngest champion in Formula 1 history. He has led the championship since Japan in March.</p>
+  </section>
+
+  <section>
+    <div class="label">The week in F1</div>
+    <div class="takes">
+      <div class="take">
+        <h3>Mercedes goes all in on its upgrade</h3>
+        <p>Mercedes' latest aero package had a rough debut in Malaysia, so in Singapore only Antonelli ran it while Russell went back to the older spec for comparison. In Austin, both cars get it, along with a new front wing. Toto Wolff called the last two weekends difficult and said the field is now close enough that the team has to keep improving. Both W17s also get a touch of blue on the livery this weekend.</p>
+      </div>
+      <div class="take">
+        <h3>Ferrari brings a new floor</h3>
+        <p>Ferrari arrives with a new floor and revised sidepods on the SF-26. The goal is more downforce and a car that's less sensitive to changing conditions. Hamilton, 111 points back, needs the upgrade to work right away.</p>
+      </div>
+      <div class="take">
+        <h3>Verstappen is the man to beat</h3>
+        <p>Red Bull went 15 rounds without a win, then Verstappen won Malaysia and Singapore back to back. Austin suits him too: he has won four of the last five US Grands Prix. On his weekend off, he made his GT World Challenge Europe debut at Portimão in a Mercedes-AMG GT3. A penalty during a teammate's stint dropped the car to 24th, and Verstappen drove it back to ninth.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="label">Austin need-to-know</div>
+    <p><strong>No sprint this time.</strong> After three straight years of sprints at the Circuit of the Americas, it's a standard weekend: three practice sessions, qualifying Saturday and a 56-lap race Sunday. Singapore was the season's last sprint.</p>
+    <p><strong>The track.</strong> 5.513 km and 20 corners, from the steep climb into Turn 1 to the fast esses of Turns 3 to 6 and a long back straight. Pirelli is bringing its C2, C3 and C4 tires and expects most teams to stop once.</p>
+    <p><strong>By the numbers.</strong> Hamilton has the most US GP wins with six. Leclerc's 1:36.169 from 2019 is still the lap record. Recent Austin races have had a safety car about 29% of the time and a virtual safety car 43% of the time.</p>
+  </section>
+
+  <section>
+    <div class="label">Weekend schedule · Pacific / Eastern</div>
+    <div class="cal">
+      <div><span class="d">Fri</span><span>Practice 1 · 10:30 AM PT / 1:30 PM ET</span></div>
+      <div><span class="d">Fri</span><span>Practice 2 · 2:00 PM PT / 5:00 PM ET</span></div>
+      <div><span class="d">Sat</span><span>Practice 3 · 10:30 AM PT / 1:30 PM ET</span></div>
+      <div><span class="d">Sat</span><span>Qualifying · 2:00 PM PT / 5:00 PM ET</span></div>
+      <div class="next"><span class="d">Sun</span><span>Grand Prix · 1:00 PM PT / 4:00 PM ET</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="label">Paddock notes</div>
+    <p><strong>Herta gets an F1 run.</strong> Colton Herta will drive Sergio Pérez's Cadillac in first practice in Austin.</p>
+    <p><strong>Qatar and Abu Dhabi are on.</strong> FIA president Mohammed Ben Sulayem says the last two races will go ahead despite the conflict in the region. Imola remains on standby.</p>
+    <p><strong>Shorter races for 2027.</strong> Grands Prix will drop from about 305 km to 290 km next season, two or three laps fewer, to fit the fuel demands of the revised power unit rules. Standard distances return in 2028.</p>
+    <p><strong>Rookies lining up.</strong> Rafael Camara will race number 50 for Haas in 2027. McLaren reserve Leonardo Fornaroli will drive first practice in Mexico City and São Paulo.</p>
+    <p><strong>Off-track gear.</strong> F1 and Leica have released a Formula 1 edition of the Leica Q3 43 camera, with a grip inspired by an F1 steering wheel.</p>
+  </section>
+
+  <section>
+    <div class="two">
+      <div>
+        <div class="label">Drivers' championship</div>
+        <div class="tbl">
+          <table class="stand">
+            <tr><th>Pos</th><th>Driver</th><th class="r">Pts</th></tr>
+            <tr><td class="mono">1</td><td><span class="sw" style="background:var(--merc)"></span>Antonelli</td><td class="r">340</td></tr>
+            <tr><td class="mono">2</td><td><span class="sw" style="background:var(--merc)"></span>Russell</td><td class="r">238</td></tr>
+            <tr><td class="mono">3</td><td><span class="sw" style="background:var(--fer)"></span>Hamilton</td><td class="r">229</td></tr>
+            <tr><td class="mono">4</td><td><span class="sw" style="background:var(--rb)"></span>Verstappen</td><td class="r">221</td></tr>
+            <tr><td class="mono">5</td><td><span class="sw" style="background:var(--fer)"></span>Leclerc</td><td class="r">215</td></tr>
+            <tr><td class="mono">6</td><td><span class="sw" style="background:var(--mcl)"></span>Norris</td><td class="r">201</td></tr>
+          </table>
+        </div>
+      </div>
+      <div>
+        <div class="label">Constructors' championship</div>
+        <div class="tbl">
+          <table class="stand">
+            <tr><th>Pos</th><th>Team</th><th class="r">Pts</th></tr>
+            <tr><td class="mono">1</td><td><span class="sw" style="background:var(--merc)"></span>Mercedes</td><td class="r">578</td></tr>
+            <tr><td class="mono">2</td><td><span class="sw" style="background:var(--fer)"></span>Ferrari</td><td class="r">444</td></tr>
+            <tr><td class="mono">3</td><td><span class="sw" style="background:var(--mcl)"></span>McLaren</td><td class="r">339</td></tr>
+            <tr><td class="mono">4</td><td><span class="sw" style="background:var(--rb)"></span>Red Bull</td><td class="r">332</td></tr>
+            <tr><td class="mono">5</td><td><span class="sw" style="background:var(--muted)"></span>Racing Bulls</td><td class="r">100</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <p class="note">Mercedes leads the constructors' table by 134 points and could clinch it as early as Mexico City.</p>
+  </section>
+
+  <section>
+    <div class="label">The run-in</div>
+    <div class="cal">
+      <div class="next"><span class="d">Oct 25</span><span>United States GP · Austin · title match point</span></div>
+      <div><span class="d">Nov 1</span><span>Mexico City GP</span></div>
+      <div><span class="d">Nov 8</span><span>Brazilian GP</span></div>
+      <div><span class="d">Nov 22</span><span>Las Vegas GP</span></div>
+      <div><span class="d">Nov 29</span><span>Qatar GP</span></div>
+      <div><span class="d">Dec 6</span><span>Abu Dhabi GP · season finale</span></div>
+    </div>
+  </section>
+
+  <div class="cta">
+    <h3>The Austin recap lands Monday</h3>
+    <p>Whether Antonelli is champion or the fight goes to Mexico, the full breakdown is on <a href="https://www.youtube.com/@FullGridReview" target="_blank" rel="noopener">YouTube @FullGridReview</a> and <a href="https://www.tiktok.com/@fullgridreview" target="_blank" rel="noopener">TikTok @fullgridreview</a> the Monday after the race, with the next FGR Weekly in your inbox the same day.</p>
+    <p>Follow along on <a href="https://www.facebook.com/fullgridreview" target="_blank" rel="noopener">Facebook</a> and <a href="https://www.instagram.com/fullgridreview" target="_blank" rel="noopener">Instagram</a> @fullgridreview.</p>
+  </div>
+
+  <nav class="nav"><a href="singapore.html">← Round 17 · Singapore</a><span></span></nav>
+  <footer class="foot">
+    <p>Forwarded this? Subscribe free at fullgridreview.com.</p>
+    <p>The Full Grid Review is an independent fan channel, not affiliated with Formula 1 or any team. Questions or tips: fullgridrev@gmail.com</p>
+  </footer>
+</div>
+
+</body></html>
